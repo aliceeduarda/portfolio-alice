@@ -84,6 +84,12 @@
         display: none;
     }
 
+    #portfolioBtn {
+    background:#8EBFB6;
+    display: none;
+     }
+
+
     #feedback {
         margin-top: 15px;
         font-weight: bold;
@@ -118,6 +124,10 @@
 
      <p id="finalMessage"></p>
     <button id="githubBtn" onclick="window.location.href='https://github.com/aliceeduarda'">Ir para o Github</button>
+
+    <button id="portfolioBtn" onclick="window.location.href='../index.html'">
+    Voltar ao Portfólio
+</button>
 
 </div>
 
@@ -297,6 +307,8 @@ function finishQuiz() {
 
             document.getElementById("linkedinBtn").style.display = "block";
             document.getElementById("githubBtn").style.display = "block";
+            document.getElementById("portfolioBtn").style.display = "block";
+
 
     } else {
         finalMsg =
@@ -305,6 +317,8 @@ function finishQuiz() {
 
         document.getElementById("linkedinBtn").style.display = "block";
         document.getElementById("githubBtn").style.display = "block";
+        document.getElementById("portfolioBtn").style.display = "block";
+
     }
 
     document.getElementById("question").innerHTML = "";
