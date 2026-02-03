@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Decode Alice:<br>A futura Dev do seu time! 🖥️</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f3f3f3;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        background: #fff;
+        padding: 30px;
+        width: 90%;
+        max-width: 450px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        text-align: center;
+    }
+
+    #progress {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+        display: none;
+    }
+
+    .option {
+        background: #ececec;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    .option.correct {
+        background: #4CAF50 !important;
+        color: white;
+    }
+
+    .option.wrong {
+        background: #E53935 !important;
+        color: white;
+    }
+
+    button {
+        background: #4b79ff;
+        border: none;
+        padding: 12px 20px;
+        color: #fff;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    button:hover {
+        background: #3d5fde;
+    }
+
+    #nextBtn {
+        display: none;
+    }
+
+    #linkedinBtn {
+        background: #0A66C2;
+        display: none;
+    }
+
+    #githubBtn {
+        background: #5d6670;
+        display: none;
+    }
+
+    #feedback {
+        margin-top: 15px;
+        font-weight: bold;
+        min-height: 20px;
+    }
+
+    #finalMessage {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2 id="title">Quiz Decode Alice:<br>A futura Dev do seu time! 🖥️</h2>
+
+    <p id="progress"></p>
+
+    <p id="question">Clique no botão abaixo para começar!</p>
+
+    <div id="options"></div>
+
+    <p id="feedback"></p>
+
+    <button id="startBtn" onclick="startQuiz()">Começar Quiz</button>
+    <button id="nextBtn" onclick="nextQuestion()">Próxima Pergunta</button>
+
+    <p id="finalMessage"></p>
+    <button id="linkedinBtn" onclick="window.location.href='https://www.linkedin.com/in/aliceeduarda-mth'">Ir para o LinkedIn</button>
+
+     <p id="finalMessage"></p>
+    <button id="githubBtn" onclick="window.location.href='https://github.com/aliceeduarda'">Ir para o Github</button>
+
+</div>
+
+<script>
+const quizData = [
+    { question: "1) Em que área e em qual instituição a Alice está se formando?",
+        options: ["Medicina - ESTÁCIO", "Análise e Desenvolvimento de Sistemas - UNISUAM", "Administração - UFRJ"],
+        answer: 1,
+        correctMsg: "Isso aí! Alice está construindo sua carreira em tecnologia na UNISUAM.",
+        errorMsg: "Quase! Dica: ela vive com o VS Code aberto…"
+    },
+    {   
+        question: "2) Qual situação fez a Alice assumir responsabilidades muito cedo?",
+        options: [
+            "Mudança de país",
+            "Ser filha única",
+            "Cuidar da casa e da família quando a sua mãe adoeceu"
+        ],
+        answer: 2,
+        correctMsg: "Isso! Ela segurou firme pela família e seguiu estudando.",
+        errorMsg: "Não foi essa… tente outra!"
+    },
+    {   
+        question: "3) Como a Alice conquistou 100% de bolsa na universidade?",
+        options: [
+            "Sorteio",
+            "Estudando muito de dia enquanto trabalhava como garçonete à noite",
+            "Jogando no bicho (😅 brincadeira)"
+        ],
+        answer: 1,
+        correctMsg: "Exatamente! Muito esforço e dedicação.",
+        errorMsg: "Não! Essa conquista veio de muito esforço."
+    },
+    {   
+        question: "4) Qual palavra representa algumas da características da Alice?",
+        options: ["Resignação", "Resiliência", "Impaciência"],
+        answer: 1,
+        correctMsg: "Sim! Ela não desiste, aprende e recomeça.",
+        errorMsg: "Essa não! Pense em força."
+    },
+    {   
+        question: "5) Além das habilidades técnicas em Dev, qual o nível de proficiência da Alice no idioma Inglês?",
+    options: ["Básico", "Intermediário", "Fluente"],
+    answer: 1,
+    correctMsg: "Correto!  Com inglês intermediário, ela consegue consultar documentações técnicas e se comunicar em ambientes globais.",
+    errorMsg: "Quase! A Alice já possui nível intermediário, essencial para a área de tecnologia."
+    },
+    {   
+        question: "6) Além de Web, a Alice tem experiência em Mobile. Qual dessas ferramentas ela já utilizou?",
+    options: ["Ionic, React e Android Studio", "Apenas montagem de PCs", "Design de Logotipos"],
+    answer: 0,
+    correctMsg: "Correto! Ela entende de tecnologias modernas.",
+    errorMsg: "Tente de novo! A Alice usa frameworks."
+    },
+    {
+    question: "7) Em quais dessas grandes empresas a Alice adquiriu experiência profissional?",
+    options: [
+      "Sadia e Perdigão", 
+      "Eletrobras e Auto Viação 1001", 
+      "Globo e SBT"],
+    answer: 1,
+    correctMsg: "Correto! Essas experiências sólidas ajudaram a moldar sua postura profissional.",
+    errorMsg: "Não foram essas! A Alice já passou por grandes empresas como a Eletrobras e a 1001."
+  },
+    {   
+        question: "8) Além do ambiente universitário, como a Alice adquiriu grande parte do seu conhecimento técnico?",
+        options: [
+            "Apenas na escola",
+            "Estudos práticos, projetos pessoais e cursos online",
+            "Observando amigos"
+],
+        answer: 1,
+        correctMsg: "Certíssimo! Ela é autodidata também.",
+        errorMsg: "Não foi essa! Ela cresceu muito praticando."
+    },
+    {   
+    question: "9) A Alice possui competência para atuar em quais frentes de uma aplicação Web?",
+    options: ["Apenas no visual (Front-end)", "Apenas no servidor (Back-end)", "Na estruturação completa (Front e Back-end)"],
+    answer: 2,
+    correctMsg: "Exato! A Alice domina a estruturação de ponta a ponta, Full Stack!",
+    errorMsg: "Na verdade, o diferencial da Alice é entender as duas frentes: Front e Back-end!"
+    },
+    {
+        question: "10) Com base em suas competências, qual é o foco de carreira atual da Alice?",
+    options: [
+      "Trabalhar exclusivamente com design gráfico", 
+      "Ingressar no mercado como Desenvolvedora Júnior ou Estagiária", 
+      "Atuar na área administrativa de empresas"
+    ],
+    answer: 1,
+    correctMsg: "Exatamente! A Alice está pronta para aplicar seus conhecimentos em projetos reais e crescer no time de tecnologia.",
+    errorMsg: "Não é essa! O foco dela é na área de tecnologia."
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz() {
+    score = 0;
+    currentQuestion = 0;
+    document.getElementById("startBtn").style.display = "none";
+    document.getElementById("progress").style.display = "block";
+    loadQuestion();
+}
+
+function loadQuestion() {
+    answered = false;
+
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("finalMessage").innerHTML = "";
+
+    document.getElementById("progress").innerText =
+        "Pergunta " + (currentQuestion + 1) + " / " + quizData.length;
+
+    const q = quizData[currentQuestion];
+    document.getElementById("question").innerHTML = q.question;
+
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    q.options.forEach((opt, index) => {
+        const btn = document.createElement("div");
+        btn.classList.add("option");
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(btn, index);
+        optionsDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(btn, selected) {
+    if (answered) return;
+    answered = true;
+
+    const q = quizData[currentQuestion];
+
+    const options = document.querySelectorAll(".option");
+    options.forEach(o => o.style.pointerEvents = "none");
+
+    if (selected === q.answer) {
+        btn.classList.add("correct");
+        score++;
+        document.getElementById("feedback").innerText = q.correctMsg;
+    } else {
+        btn.classList.add("wrong");
+        document.getElementById("feedback").innerText = q.errorMsg;
+    }
+
+    document.getElementById("nextBtn").style.display = "block";
+}
+
+function nextQuestion() {
+    currentQuestion++;
+
+    if (currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        finishQuiz();
+    }
+}
+
+function finishQuiz() {
+    document.getElementById("title").innerText = "Quiz Finalizado!";
+    document.getElementById("options").innerHTML = "";
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+
+    let finalMsg = "";
+
+    if (score >= 5) {
+        finalMsg =
+            `Você acertou ${score} de ${quizData.length}!  
+            Agora você conhece um pouco mais sobre essa desenvolvedora, obrigada por jogar!
+            Visite também meu LinkedIn e Github:`;
+
+            document.getElementById("linkedinBtn").style.display = "block";
+            document.getElementById("githubBtn").style.display = "block";
+
+    } else {
+        finalMsg =
+            `Você acertou ${score} de ${quizData.length}.  
+            Não foi dessa vez! Tente novamente ou visite meu LinkedIn e Github:`;
+
+        document.getElementById("linkedinBtn").style.display = "block";
+        document.getElementById("githubBtn").style.display = "block";
+    }
+
+    document.getElementById("question").innerHTML = "";
+    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("finalMessage").innerHTML = finalMsg;
+}
+</script>
+
+</body>
+</html>
