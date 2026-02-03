@@ -1,0 +1,1 @@
+Criei um portfólio em HTML e CSS com identidade visual própria, animações leves e navegação clara. Integrei um quiz interativo em JavaScript para apresentar minha trajetória de forma diferente e publiquei tudo via GitHub Pages.
