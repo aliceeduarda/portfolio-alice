@@ -112,6 +112,10 @@ section {
     background: linear-gradient(135deg, #355f5f, #4d7b73);
 }
 
+.video-section h2 {
+    margin-bottom: 90px;
+}
+
 .video-box {
     margin: 35px auto 0;
     max-width: 720px;
@@ -234,7 +238,7 @@ section {
 /* BOTÃO QUIZ */
 .quiz-btn {
     display: block;
-    margin: 35px auto 0;
+    margin: 80px auto 0;
 
     padding: 18px 42px;
     font-size: 1.05rem;
