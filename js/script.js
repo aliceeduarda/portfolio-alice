@@ -10,3 +10,7 @@ function playVideo() {
         </iframe>
     `;
 }
+
+function playAnimation() {
+    src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
+}
