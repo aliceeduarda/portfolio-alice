@@ -7,6 +7,153 @@
     --text-dark: #1F2A2A;
 }
 
+/* Animação de saudação */
+
+body {
+  background: #c5fbcd;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: min(90%, 900px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+  padding: 30px 16px 70px;
+  text-align: center;
+}
+
+/* Primeira linha */
+.container h1:nth-child(1) {
+  color: #ffffff;
+  font-family: 'Fira Code', monospace;
+  font-weight: 900;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  margin: 0 auto 18px auto;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 22ch;
+  max-width: 100%;
+  animation: type 2s steps(30, end) forwards;
+}
+
+/* Segunda linha */
+.container h1:nth-child(2) {
+  opacity: 0;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  line-height: 0.95;
+  margin: 0 auto 20px auto;
+  width: fit-content;
+  max-width: 100%;
+  background: linear-gradient(to right, #F2F0D8, #acddbe, #F2F0D8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: normal;
+  overflow: hidden;
+  animation:
+    shring-animation 2s steps(40, end) 1.2s forwards,
+    blink .5s step-end infinite alternate;
+}
+
+@keyframes shring-animation {
+  0% {
+    background-position: 0 0;
+    opacity: 0;
+    width: 0;
+  }
+  1% {
+    background-position: 0 0;
+    opacity: 1;
+    border-right: 2px solid #BF9663;
+  }
+  50% {
+    background-position: 150px 0;
+    opacity: 1;
+    border-right: 2px solid #BF9663;
+  }
+  100% {
+    background-position: 400px 0;
+    opacity: 1;
+    border-right: 2px solid #BF9663;
+  }
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  1%, 99% {
+    border-right: 2px solid #BF9663;
+  }
+  100% {
+    border-right: none;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 60px;
+  }
+
+  .container h1:nth-child(1) {
+    text-align: center;
+    width: 24ch;
+  }
+
+  .container h1:nth-child(2) {
+    white-space: normal;
+    line-height: 1.05;
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    margin-top: 50px;
+    padding: 0 12px;
+  }
+
+  .container h1:nth-child(1) {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .container h1:nth-child(2) {
+    font-size: clamp(2rem, 12vw, 3.2rem);
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-top: 40px;
+    padding: 24px 14px 60px;
+  }
+
+  .container h1:nth-child(1) {
+    width: 24ch;
+    font-size: 1.3rem;
+  }
+
+  .container h1:nth-child(2) {
+    font-size: clamp(2.2rem, 12vw, 3.4rem);
+    margin-bottom: 10px;
+  }
+}
+
+
 /* RESET */
 * {
     margin: 0;
@@ -21,7 +168,7 @@ body {
 }
 
 .foto-perfil {
-    width: 270px;
+    width: 300px;
     height: 320px;
     object-fit: cover;
     border-radius: 24px;
@@ -112,12 +259,14 @@ section {
     background: linear-gradient(135deg, #355f5f, #4d7b73);
 }
 
-.video-section h2 {
-    margin-bottom: 90px;
+.video-title {
+    margin-bottom: 80px;
+    font-size: 2rem;
+    opacity: 0.85;
 }
 
 .video-box {
-    margin: 35px auto 0;
+    margin: 0 auto 50px auto;
     max-width: 720px;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -321,19 +470,23 @@ section {
 }
 
 .links {
-    margin-top: 30px;
+
+    margin-top: 40px;
     display: flex;
     justify-content: center;
-    gap: 18px;
+    align-items: center;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
 .links a {
     text-decoration: none;
-    padding: 13px 30px;
-    border-radius: 30px;
+    margin-left: 40PX;
+    margin-right: 40PX;
+    padding: 12px 30px;
+    border-radius: 15px;
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -342,13 +495,203 @@ section {
     opacity: 0.9;
 }
 
-.linkedin {
-    background: #0A66C2;
+/* BOTÃO ANIMADO LINKEDIN */
+
+.linkedin-btn {
+    position: relative;
+    display: inline-block;
+    padding: 16px 28px;
+    margin-top: 20px;
+    color: #07329f;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    overflow: hidden;
+    transition: 0.5s;
+    border-radius: 12px;
+    background: #e2eaff;
 }
 
-.github {
-    background: #24292e;
+.linkedin-btn:hover {
+    background: #07329f;
+    color: #ffffff;
+    box-shadow:
+        0 0 5px #8EBFB6,
+        0 0 25px #022983,
+        0 0 50px rgba(142, 191, 182, 0.8);
 }
+
+.linkedin-btn span {
+    position: absolute;
+    display: block;
+}
+
+.linkedin-btn span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #07329f);
+    animation: linkedinAnim1 1s linear infinite;
+}
+
+@keyframes linkedinAnim1 {
+    0% {
+        left: -100%;
+    }
+    50%, 100% {
+        left: 100%;
+    }
+}
+
+.linkedin-btn span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #07329f);
+    animation: linkedinAnim2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes linkedinAnim2 {
+    0% {
+        top: -100%;
+    }
+    50%, 100% {
+        top: 100%;
+    }
+}
+
+.linkedin-btn span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(270deg, transparent, #07329f);
+    animation: linkedinAnim3 1s linear infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes linkedinAnim3 {
+    0% {
+        right: -100%;
+    }
+    50%, 100% {
+        right: 100%;
+    }
+}
+
+.linkedin-btn span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #07329f);
+    animation: linkedinAnim4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes linkedinAnim4 {
+    0% {
+        bottom: -100%;
+    }
+    50%, 100% {
+        bottom: 100%;
+    }
+}
+
+/* BOTÃO ANIMADO GITHUB */
+.github-btn {
+    position: relative;
+    display: inline-block;
+    padding: 16px 28px;
+    margin-top: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    overflow: hidden;
+    transition: 0.5s;
+    border-radius: 12px;
+    background: #d1d1d2;
+}
+
+.github-btn:hover {
+    background: #24292e;
+    color: white;
+    box-shadow:
+        0 0 5px #24292e,
+        0 0 25px #24292e,
+        0 0 50px rgba(36,41,46,0.7);
+}
+
+.github-btn span {
+    position: absolute;
+    display: block;
+}
+
+.github-btn span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #24292e);
+    animation: githubAnim1 1s linear infinite;
+}
+
+@keyframes githubAnim1 {
+    0% { left: -100%; }
+    50%,100% { left: 100%; }
+}
+
+.github-btn span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #24292e);
+    animation: githubAnim2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes githubAnim2 {
+    0% { top: -100%; }
+    50%,100% { top: 100%; }
+}
+
+.github-btn span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(270deg, transparent, #24292e);
+    animation: githubAnim3 1s linear infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes githubAnim3 {
+    0% { right: -100%; }
+    50%,100% { right: 100%; }
+}
+
+.github-btn span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #24292e);
+    animation: githubAnim4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes githubAnim4 {
+    0% { bottom: -100%; }
+    50%,100% { bottom: 100%; }
+}
+
 
 /* RESPONSIVO */
 @media (max-width: 900px) {
@@ -387,3 +730,5 @@ section {
         text-align: center;
     }
 }
+
+
