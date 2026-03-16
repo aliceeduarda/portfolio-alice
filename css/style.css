@@ -19,7 +19,7 @@ body {
   width: min(90%, 900px);
   margin-left: auto;
   margin-right: auto;
-  margin-top: 60px;
+  margin-top: 10px;
   padding: 30px 16px 70px;
   text-align: center;
 }
@@ -49,14 +49,14 @@ body {
   margin: 0 auto 20px auto;
   width: fit-content;
   max-width: 100%;
-  background: linear-gradient(to right, #F2F0D8, #acddbe, #F2F0D8);
+  background: linear-gradient(to right, #acddbe, #F2F0D8, #acddbe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   white-space: normal;
   overflow: hidden;
   animation:
     shring-animation 2s steps(40, end) 1.2s forwards,
-    blink .5s step-end infinite alternate;
+    blink 30s step-end infinite alternate;
 }
 
 @keyframes shring-animation {
@@ -238,6 +238,10 @@ section {
 
 /* ===== SEÇÃO 1 ===== */
 .hero {
+    min-height: 100vh;
+    padding: 20px 20px 40px;
+    display: flex;
+    align-items: center;
     background: linear-gradient(135deg, var(--green-dark), var(--green-soft));
 }
 
